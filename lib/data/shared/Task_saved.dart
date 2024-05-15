@@ -13,4 +13,3 @@ class TaskerPreference {
   static List<String>? getString() => _preferences?.getStringList(_isSelect);
 }
 
-

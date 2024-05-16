@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             title: "Fluttter Demo",
             debugShowCheckedModeBanner: false,
             themeMode: themeProvider.themeMode,
-            darkTheme: Mytheme.darkthem,
+            darkTheme: Mytheme.darktheme,
             theme: Mytheme.lighttheme,
             home: HiddenDrawer(),
           );

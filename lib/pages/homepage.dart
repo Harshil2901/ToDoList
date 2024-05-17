@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             SizedBox(height: he * 0.01),
                             Text(
-                              tasklist[1].title,
+                              tasklist[t].title,
                               style: TextStyle(
                                   fontSize: 23,
                                   color: Theme.of(context).primaryColor,
@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: const EdgeInsets.only(right: 30),
                               child: LineProgress(
                                 value: notes.length.toDouble(),
-                                color: tasklist[1].progresscolor,
+                                color: tasklist[t].progresscolor,
                               ),
                             )
                           ],

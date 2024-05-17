@@ -1,20 +1,33 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import 'package:todolist/pages/Drawerhidden/hiddendrawer.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/data/shared/Task_saved.dart';
+import 'package:todolist/data/themes.dart';
 
-void main() {
-  runApp(const MainApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await TaskerPreference.init();
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+
+          return MaterialApp(
+            title: "Fluttter Demo",
+            debugShowCheckedModeBanner: false,
+            themeMode: themeProvider.themeMode,
+            darkTheme: Mytheme.darktheme,
+            theme: Mytheme.lighttheme,
+            home: HiddenDrawer(),
+          );
+        },
+      );
 }

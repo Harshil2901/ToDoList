@@ -32,12 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
     refreshNote();
   }
 
-  @override
-  void dispose() {
-    NotesDatabase.instance.close();
-    super.dispose();
-  }
-
   Future refreshNote() async {
     setState(() => true);
     notes = await NotesDatabase.instance.readAllNotes();

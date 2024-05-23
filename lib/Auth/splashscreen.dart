@@ -11,10 +11,10 @@ class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
 
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  State<Splashscreen> createState() => SplashscreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class SplashscreenState extends State<Splashscreen> {
   static const String KEYLOGIN = "Login";
   @override
   void initState() {

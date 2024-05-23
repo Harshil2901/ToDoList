@@ -6,6 +6,8 @@ import 'package:todolist/Auth/splashscreen.dart';
 import 'package:todolist/constant/constant.dart';
 import 'dart:convert';
 
+import 'package:todolist/pages/Drawerhidden/hiddendrawer.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -38,7 +40,9 @@ class _LoginPageState extends State<LoginPage> {
         "email": emailController.text,
         "password": passwordController.text
       });
-      if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+
+      if (response.statusCode == 200 && data['status'] == true) {
         var responseData = json.decode(response.body);
         var userid = responseData['user']['id'];
         var username = responseData['user']['name'];
@@ -55,9 +59,21 @@ class _LoginPageState extends State<LoginPage> {
         bool isSaved =
             await sharedPref.setBool(SplashscreenState.KEYLOGIN, true);
         print("sharedpreference $isSaved");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HiddenDrawer()));
+      } else if (response.statusCode == 255) {
+        setState(() {
+          _errorMessage = "Email and password cannot be blank";
+        });
+      } else {
+        setState(() {
+          _errorMessage = "Incorrect Email Password!!!";
+        });
       }
     } catch (e) {
-      print("Error $e");
+      setState(() {
+        _errorMessage = "An error occured during login";
+      });
     }
   }
 
@@ -125,7 +141,13 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: "Enter your Password"),
                       ),
                       SizedBox(
-                        height: he * 0.03,
+                        height: he * 0.01,
+                      ),
+                      if (_errorMessage.isNotEmpty)
+                        Text(_errorMessage,
+                            style: TextStyle(color: Colors.red, fontSize: 15)),
+                      SizedBox(
+                        height: he * 0.01,
                       ),
                       Container(
                         width: we * 0.5,

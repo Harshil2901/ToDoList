@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todolist/constant/constant.dart';
 import 'dart:convert';
 
@@ -14,6 +15,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
+
+  bool _isLoading = false;
+  String _errorMessage = "";
 
   @override
   void dispose() {
@@ -23,18 +28,31 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = "";
+    });
     try {
       http.Response response = await http.post(Uri.parse(loginNote), body: {
         "email": emailController.text,
         "password": passwordController.text
       });
       if (response.statusCode == 200) {
-        var responseData = jsonEncode(response.body);
-
-        var token = responseData[0];
+        var responseData = json.decode(response.body);
+        var userid = responseData['user']['id'];
+        var username = responseData['user']['name'];
+        var useremail = responseData['user']['email'];
+        var token = responseData['token'];
+        print(userid);
+        print(username);
+        print(useremail);
         print(token);
 
-        print(responseData);
+        // var sharedPref = await SharedPreferences.getInstance();
+
+        saveUserInfo(userid, username, useremail, token);
+        // bool isSaved = sharedPref == true;
+        // print("sharedpreference $isSaved");
       }
     } catch (e) {
       print("Error $e");
@@ -131,4 +149,12 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+Future<void> saveUserInfo(userid, username, useremail, token) async {
+  SharedPreferences sharedPref = await SharedPreferences.getInstance();
+  await sharedPref.setInt('userid', userid);
+  await sharedPref.setString('username', username);
+  await sharedPref.setString('useremail', useremail);
+  await sharedPref.setString('token', token);
 }

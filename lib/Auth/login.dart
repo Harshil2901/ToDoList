@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           print(responseData);
         }
       } catch (e) {
-        Throw Exception("Error $e");
+        print("Error $e");
       }
     }
 

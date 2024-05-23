@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todolist/Auth/splashscreen.dart';
 import 'package:todolist/constant/constant.dart';
 import 'dart:convert';
 
@@ -48,11 +49,12 @@ class _LoginPageState extends State<LoginPage> {
         print(useremail);
         print(token);
 
-        // var sharedPref = await SharedPreferences.getInstance();
+        var sharedPref = await SharedPreferences.getInstance();
 
         saveUserInfo(userid, username, useremail, token);
-        // bool isSaved = sharedPref == true;
-        // print("sharedpreference $isSaved");
+        bool isSaved =
+            await sharedPref.setBool(SplashscreenState.KEYLOGIN, true);
+        print("sharedpreference $isSaved");
       }
     } catch (e) {
       print("Error $e");

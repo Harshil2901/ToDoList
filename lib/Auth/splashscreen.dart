@@ -74,7 +74,7 @@ class SplashscreenState extends State<Splashscreen> {
       if (isLoggedIn != null) {
         if (isLoggedIn) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => LoginPage()));
+              context, MaterialPageRoute(builder: (context) => HiddenDrawer()));
         } else {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => LoginPage()));

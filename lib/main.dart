@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:todolist/Auth/login.dart';
 import 'package:todolist/pages/Drawerhidden/hiddendrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/data/shared/Task_saved.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             darkTheme: Mytheme.darktheme,
             theme: Mytheme.lighttheme,
-            home: HiddenDrawer(),
+            home: LoginPage(),
+            // home: HiddenDrawer(),
           );
         },
       );

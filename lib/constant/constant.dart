@@ -1,5 +1,5 @@
 const String baseUrl =
-    'https://7609-2402-3a80-8fc-f9a1-e11e-4630-a528-4d76.ngrok-free.app/api';
+    'https://4783-2402-3a80-1cf1-bdb2-127-477e-2eb0-215c.ngrok-free.app/api';
 
 const String loginNote = '$baseUrl/login';
 const String registerNote = '$baseUrl/register';

@@ -56,7 +56,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                         item.title,
                         style: const TextStyle(color: Colors.white),
                       ),
-                      onTap: () {},
+                      onTap: item.page,
                     ))
                 .toList()),
       );
